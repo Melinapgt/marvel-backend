@@ -27,6 +27,9 @@ app.use(comicsRoutes);
 const charactersRoutes = require("./routes/characters");
 app.use(charactersRoutes);
 
+const comicsCharacterIdRoutes = require("./routes/comicsCharacterId");
+app.use(comicsCharacterIdRoutes);
+
 app.all("*", (req, res) => {
   res.json({ message: "Page Not Found" });
 });

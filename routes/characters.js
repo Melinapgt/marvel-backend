@@ -7,23 +7,38 @@ const res = require("express/lib/response");
 const apikey = process.env.MARVEL_APIKEY;
 
 //récupérer les infos personnages
+// router.get("/characters", async (req, res) => {
+//   try {
+//     console.log(req.query);
+
+//     const getCharacter = async () => {
+//       try {
+//         const response = await axios.get(
+//           `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${apikey}`
+//         );
+//         console.log(response.data);
+//         res.status(200).json(response.data);
+//       } catch (error) {
+//         console.log("error.response ==>", error.response);
+//       }
+//     };
+
+//     getCharacter();
+//   } catch (error) {
+//     console.log("error.response ==>", error.response);
+//     res.status(400).json({ error: "Bad request" });
+//   }
+// });
+
 router.get("/characters", async (req, res) => {
   try {
     console.log(req.query);
 
-    const getCharacter = async () => {
-      try {
-        const response = await axios.get(
-          `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${apikey}`
-        );
-        console.log(response.data);
-        res.status(200).json(response.data);
-      } catch (error) {
-        console.log("error.response ==>", error.response);
-      }
-    };
-
-    getCharacter();
+    const response = await axios.get(
+      `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${apikey}`
+    );
+    console.log(response.data);
+    res.status(200).json(response.data);
   } catch (error) {
     console.log("error.response ==>", error.response);
     res.status(400).json({ error: "Bad request" });
