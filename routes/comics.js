@@ -3,7 +3,7 @@ const router = express.Router();
 const axios = require("axios");
 
 // API MARVEL
-const apikey = "mLFBQvAaDPLUBOq7";
+const apikey = process.env.MARVEL_APIKEY;
 
 router.get("/comics", async (req, res) => {
   try {

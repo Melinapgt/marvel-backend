@@ -3,6 +3,7 @@ const formidable = require("express-formidable");
 const cors = require("cors");
 const axios = require("axios");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 const app = express();
 app.use(formidable());
@@ -12,9 +13,6 @@ app.use(cors());
 // mongoose.connect("mongodb://localhost/marvel");
 
 // Model a déterminer
-
-// API MARVEL
-const apikey = "mLFBQvAaDPLUBOq7";
 
 // Routes
 

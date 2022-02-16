@@ -4,7 +4,7 @@ const axios = require("axios");
 const res = require("express/lib/response");
 
 // API MARVEL
-const apikey = "mLFBQvAaDPLUBOq7";
+const apikey = process.env.MARVEL_APIKEY;
 
 //récupérer les infos personnages
 router.get("/characters", async (req, res) => {
