@@ -9,18 +9,15 @@ router.get("/comics", async (req, res) => {
   try {
     console.log(req.query);
 
-    const getComics = async () => {
-      try {
-        const response = await axios.get(
-          `https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=${apikey}`
-        );
-        console.log(response.data);
-        res.status(200).json(response.data);
-      } catch (error) {
-        console.log("error.response ==>", error.response);
-      }
-    };
-    getComics();
+    const response = await axios.get(
+      `https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=${apikey}`
+    );
+    console.log(response.data);
+    res.status(200).json(response.data);
+
+    // const results = response.data.results;
+
+    res.json(results);
   } catch (error) {
     console.log("error.response ==>", error.response);
     res.status(400).json({ error: "Bad request" });
