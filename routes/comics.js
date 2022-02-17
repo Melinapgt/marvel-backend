@@ -10,19 +10,28 @@ router.get("/comics", async (req, res) => {
     console.log(req.query);
     console.log(req.query.title);
 
-    //gestion des query pour la recherche soit title soit name
-    const filter = {};
-    if (req.query.title) {
-      filter.title = new RegExp(req.query.title, "i");
+    // gestion de la recherche
+    const search = req.query.title;
+
+    //gestion des pages
+    const limit = 100;
+    const page = req.query.page;
+    const skip = (page - 1) * limit;
+    console.log(skip);
+
+    if (search) {
+      const response = await axios.get(
+        `https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=${apikey}&title=${search}&skip=${skip}`
+      );
+      res.status(200).json(response.data);
+    } else {
+      const response = await axios.get(
+        `https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=${apikey}&skip=${skip}`
+      );
+      res.status(200).json(response.data);
     }
 
-    const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=${apikey}`
-      // `https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=${apikey}?title=${filter}`
-    );
     // console.log(response.data);
-
-    res.status(200).json(response.data);
   } catch (error) {
     console.log("error.response ==>", error.response);
     res.status(400).json({ error: "Bad request" });
