@@ -31,8 +31,11 @@ app.use(comicsCharacterIdRoutes);
 const signupRoutes = require("./routes/signup");
 app.use(signupRoutes);
 
+const loginRoutes = require("./routes/login");
+app.use(loginRoutes);
+
 app.all("*", (req, res) => {
-  res.json({ message: "Page Not Found" });
+  res.status(404).json({ message: "Page Not Found" });
 });
 
 app.listen(4001, () => {
