@@ -9,10 +9,8 @@ const app = express();
 app.use(formidable());
 app.use(cors());
 
-// Connexion à la BDD nommée "marvel" :
-// mongoose.connect("mongodb://localhost/marvel");
-
-// Model a déterminer
+// Connexion à la BDD nommée "marvel-comics" :
+mongoose.connect("mongodb://localhost/marvel-comics");
 
 // Routes
 
@@ -29,6 +27,9 @@ app.use(charactersRoutes);
 
 const comicsCharacterIdRoutes = require("./routes/comicsCharacterId");
 app.use(comicsCharacterIdRoutes);
+
+const signupRoutes = require("./routes/signup");
+app.use(signupRoutes);
 
 app.all("*", (req, res) => {
   res.json({ message: "Page Not Found" });
