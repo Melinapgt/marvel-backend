@@ -3,6 +3,7 @@ const router = express.Router();
 const axios = require("axios");
 
 const FavoriteComic = require("../Models/FavoriteComic");
+const FavoriteCharacter = require("../Models/FavoriteCharacter");
 const User = require("../Models/User");
 
 //Afficher les favoris dans la page -------------------
@@ -19,9 +20,10 @@ router.get("/favoris", async (req, res) => {
     const userId = user._id;
     // console.log("userId correspondant==>", userId);
 
-    const favorisComics = await FavoriteComic.find({ userId });
+    const favoritesComics = await FavoriteComic.find({ userId });
     // console.log("favorisComics ==>", favorisComics);
-    res.status(200).json(favorisComics);
+    const favoritesCharacters = await FavoriteCharacter.find({ userId });
+    res.status(200).json({ favoritesComics, favoritesCharacters });
   } catch (error) {
     console.log("error.response ==>", error.response);
     res.status(404).json({ error: "Bad request" });

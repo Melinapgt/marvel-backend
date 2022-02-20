@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-const res = require("express/lib/response");
 
 // API MARVEL
 const apikey = process.env.MARVEL_APIKEY;
