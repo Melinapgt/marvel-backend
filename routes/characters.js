@@ -9,8 +9,8 @@ const apikey = process.env.MARVEL_APIKEY;
 router.get("/characters", async (req, res) => {
   try {
     console.log(req.query);
-    console.log(req.query.name);
-    console.log(req.query.page);
+    // console.log(req.query.name);
+    // console.log(req.query.page);
 
     //gestion de la recherche
     const search = req.query.name;
@@ -20,7 +20,7 @@ router.get("/characters", async (req, res) => {
     const limit = 100;
     const page = req.query.page;
     const skip = (page - 1) * limit;
-    console.log(skip);
+    // console.log(skip);
 
     if (search) {
       const response = await axios.get(

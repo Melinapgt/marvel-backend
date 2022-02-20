@@ -34,6 +34,9 @@ app.use(signupRoutes);
 const loginRoutes = require("./routes/login");
 app.use(loginRoutes);
 
+const favoritesComicsRoutes = require("./routes/FavoritesComics");
+app.use(favoritesComicsRoutes);
+
 app.all("*", (req, res) => {
   res.status(404).json({ message: "Page Not Found" });
 });
