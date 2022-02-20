@@ -13,13 +13,20 @@ const router = express.Router();
 //sur la page on fait requête à  l'aide des éléménts en bdd
 
 const FavoriteComic = require("../Models/FavoriteComic");
+const User = require("../Models/User");
 
 //création en BDD
 router.post("/ajout/favoris/comics", async (req, res) => {
   try {
     console.log(req.fields);
 
-    const { userId, comicsId, title } = req.fields;
+    const { userToken, comicsId, title } = req.fields;
+
+    //recherche de l'userId dans User
+    const user = await User.findOne({ token: userToken });
+    console.log("user found in User with token==>", user);
+    const userId = user._id;
+    console.log("userId correspondant==>", userId);
 
     const isUserIdExisting = await FavoriteComic.findOne({ userId });
     // console.log("isUserIdExisting==>", isUserIdExisting);

@@ -8,7 +8,7 @@ const apikey = process.env.MARVEL_APIKEY;
 
 router.get("/characters", async (req, res) => {
   try {
-    console.log(req.query);
+    console.log("req.query ==>", req.query);
     // console.log(req.query.name);
     // console.log(req.query.page);
 
