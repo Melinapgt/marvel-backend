@@ -1,6 +1,5 @@
 //Routes pour les Comics ajouté en favoris
 const express = require("express");
-const axios = require("axios");
 const router = express.Router();
 
 //Etape 1
@@ -15,12 +14,13 @@ const router = express.Router();
 const FavoriteComic = require("../Models/FavoriteComic");
 const User = require("../Models/User");
 
-//création en BDD
+//AJout d'un comic dans Favoris => création en BDD
 router.post("/ajout/favoris/comics", async (req, res) => {
   try {
     console.log(req.fields);
 
-    const { userToken, comicsId, title } = req.fields;
+    const { userToken, comicsId, title, pictureComics, comicsDescription } =
+      req.fields;
 
     //recherche de l'userId dans User
     const user = await User.findOne({ token: userToken });
@@ -35,9 +35,12 @@ router.post("/ajout/favoris/comics", async (req, res) => {
         userId,
         comicsId,
         title,
+        pictureComics,
+        comicsDescription,
       });
 
       await newFavoriteComics.save();
+      console.log(newFavoriteComics);
       res.status(200).json({ message: "Ajouté!" });
     } else {
       const isComicsIdExisting = await FavoriteComic.findOne({ comicsId });
@@ -46,6 +49,8 @@ router.post("/ajout/favoris/comics", async (req, res) => {
           userId,
           comicsId,
           title,
+          pictureComics,
+          comicsDescription,
         });
 
         await newFavoriteComics.save();
@@ -59,5 +64,4 @@ router.post("/ajout/favoris/comics", async (req, res) => {
     res.status(404).json({ error: "Bad request" });
   }
 });
-
 module.exports = router;
