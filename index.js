@@ -9,7 +9,7 @@ app.use(formidable());
 app.use(cors());
 
 // Connexion à la BDD nommée "marvel-comics" :
-mongoose.connect("mongodb://localhost/marvel-comics");
+mongoose.connect(process.env.MONGODB_URI);
 
 // Routes
 
