@@ -15,7 +15,7 @@ router.post("/login", async (req, res) => {
     console.log(isEmailExisting);
 
     if (!isEmailExisting) {
-      res.status(401).json({ message: "Erreur sur email / mot de passe" });
+      res.status(401).json({ message: "Incorrect email or password!" });
     } else {
       const newHash = SHA256(password + isEmailExisting.salt).toString(
         encBase64
@@ -28,7 +28,12 @@ router.post("/login", async (req, res) => {
           firstname: isEmailExisting.firstname,
         });
       } else {
-        res.status(401).json({ error: "Unauthorized" });
+        res
+          .status(401)
+          .json({
+            error: "Unauthorized",
+            message: "Incorrect email or password!",
+          });
       }
     }
   } catch (error) {

@@ -18,7 +18,9 @@ router.post("/signup", async (req, res) => {
     console.log(isEmailExisting);
 
     if (isEmailExisting) {
-      res.status(409).json({ Error: "Ce compte existe déjà" });
+      res.status(409).json({
+        message: "This email is already used for an existing account!",
+      });
     } else {
       //authentification
       const salt = uid2(64);
@@ -39,11 +41,11 @@ router.post("/signup", async (req, res) => {
         userId: newUser.id,
         userToken: newUser.token,
         firstname: newUser.firstname,
-        message: "Bienvenu parmis nous ! Ton compte a été créé avec succès !",
+        message: "Welcom ! Your account has been succesfully created !",
       });
     }
   } catch (error) {
-    console.log("error.response ==>", error.response);
+    console.log("error.message ==>", error.message);
     res.status(404).json({ error: "Bad request" });
   }
 });

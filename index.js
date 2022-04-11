@@ -28,14 +28,8 @@ app.use(signupRoutes);
 const loginRoutes = require("./routes/login");
 app.use(loginRoutes);
 
-const favoritesComicsRoutes = require("./routes/favoritesComics");
-app.use(favoritesComicsRoutes);
-
-const favoritesRoutes = require("./routes/favorites");
-app.use(favoritesRoutes);
-
-const favoritesCharactersRoutes = require("./routes/favoriteCharacters");
-app.use(favoritesCharactersRoutes);
+const paymentRoutes = require("./routes/payment");
+app.use(paymentRoutes);
 
 app.all("*", (req, res) => {
   res.status(404).json({ message: "Page Not Found" });
